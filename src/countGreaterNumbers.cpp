@@ -24,6 +24,7 @@ struct dates
 {
 	int dd, mm, yyyy;
 };
+
 struct dates function(char* strdate)
 {
 	struct dates intdate;

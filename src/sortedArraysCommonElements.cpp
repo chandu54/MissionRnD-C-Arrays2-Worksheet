@@ -17,13 +17,39 @@ NOTES:
 */
 
 #include <iostream>
-
+#include<stddef.h>
+#include<string.h>
 struct transaction {
 	int amount;
 	char date[11];
 	char description[20];
 };
-
+struct transaction result[5];
 struct transaction * sortedArraysCommonElements(struct transaction *A, int ALen, struct transaction *B, int BLen) {
-	return NULL;
+	
+	int i, j, k = 0, temp, m, temp2 = 1;;
+	if (A == NULL || B == NULL)
+		return NULL;
+	for (i = 0; i < ALen; i++)
+	{
+		for (j = 0; j < BLen; j++)
+		{
+			temp = strcmp(A[i].date, B[j].date);
+			if (temp == 0)
+			{
+				for (m = 0; m < k; m++)
+					temp2 = strcmp(A[i].date, result[m].date);
+				if (temp2 != 0)
+				{
+					result[k].amount = A[i].amount;
+					strcpy(result[k].date, A[i].date);
+					strcpy(result[k].description, A[i].description);
+					k++;
+				}
+			}
+		}
+	}
+	if (k == 0)
+		return NULL;
+	return result;
 }
