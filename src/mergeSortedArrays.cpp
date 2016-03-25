@@ -62,13 +62,12 @@ struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct t
 	i = j = k = 0;
 	while (i <= ALen - 1 && j <= BLen-1)
 	{
-		if (Adate[i].yyyy < Bdate[i].yyyy)
+		if (Adate[i].yyyy < Bdate[j].yyyy)
 		{
 			result[k].amount = A[i].amount;
 			strcpy(result[k].date, A[i].date);
 			strcpy(result[k].description, A[i].description);
 			i++;
-			k++;
 		}
 		else if (Bdate[j].yyyy < Adate[i].yyyy)
 		{
@@ -76,7 +75,6 @@ struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct t
 			strcpy(result[k].date, B[j].date);
 			strcpy(result[k].description, B[j].description);
 			j++;
-			k++;
 		}
 		else if (Adate[i].mm < Bdate[j].mm)
 		{
@@ -84,7 +82,6 @@ struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct t
 			strcpy(result[k].date, A[i].date);
 			strcpy(result[k].description, A[i].description);
 			i++;
-			k++;
 		}
 		else if (Bdate[j].mm < Adate[i].mm)
 		{
@@ -92,7 +89,6 @@ struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct t
 			strcpy(result[k].date, B[j].date);
 			strcpy(result[k].description, B[j].description);
 			j++;
-			k++;
 		}
 		else if (Adate[i].dd < Bdate[j].dd)
 		{
@@ -100,17 +96,15 @@ struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct t
 			strcpy(result[k].date, A[i].date);
 			strcpy(result[k].description, A[i].description);
 			i++;
-			k++;
-
 		}
-		else
+		else if (Bdate[j].dd<=Adate[i].dd)
 		{
 			result[k].amount = B[j].amount;
 			strcpy(result[k].date, B[j].date);
 			strcpy(result[k].description, B[j].description);
 			j++;
-			k++;
 		}
+		k++;
 	}
 	while (i <= ALen - 1)
 	{
@@ -127,6 +121,7 @@ struct transaction * mergeSortedArrays(struct transaction *A, int ALen, struct t
 		strcpy(result[k].description, B[j].description);
 		j++;
 		k++;
+		
 	}
 	return result;
 }
